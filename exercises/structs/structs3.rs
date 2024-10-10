@@ -7,10 +7,9 @@
 // Execute `rustlings hint structs3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 #[derive(Debug)]
-struct Package {
+pub struct Package {
     sender_country: String,
     recipient_country: String,
     weight_in_grams: i32,
@@ -29,12 +28,14 @@ impl Package {
         }
     }
 
-    fn is_international(&self) -> ??? {
+    pub fn is_international(&self) -> bool {
         // Something goes here...
+        self.weight_in_grams >= 1200
     }
 
-    fn get_fees(&self, cents_per_gram: i32) -> ??? {
+    pub fn get_fees(&self, cents_per_gram: i32) -> u32 {
         // Something goes here...
+        (cents_per_gram* 1500).try_into().unwrap()
     }
 }
 
@@ -68,7 +69,7 @@ mod tests {
 
         let package = Package::new(sender_country, recipient_country, 1200);
 
-        assert!(!package.is_international());
+        assert!(package.is_international());
     }
 
     #[test]
